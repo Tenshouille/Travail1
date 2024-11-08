@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Network/loadBalancers",
+      "apiVersion": "2022-05-01",
+      "location": "East US",
+      "name": "myLoadBalancer",
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "myFrontendIP",
+            "properties": {
+              "publicIPAddress": {
+                "id": "/subscriptions/a3883bb1-0903-4e2b-bdab-6f76535f6e96/resourceGroups/GroupeRessource1/providers/Microsoft.Network/publicIPAddresses/myPublicIP"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
+            "name": "myBackendPool"
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "name": "myLoadBalancingRule",
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "/subscriptions/a3883bb1-0903-4e2b-bdab-6f76535f6e96/resourceGroups/GroupeRessource1/providers/Microsoft.Network/loadBalancers/myLoadBalancer/frontendIPConfigurations/myFrontendIP"
+              },
+              "backendAddressPool": {
+                "id": "/subscriptions/a3883bb1-0903-4e2b-bdab-6f76535f6e96/resourceGroups/GroupeRessource1/providers/Microsoft.Network/loadBalancers/myLoadBalancer/backendAddressPools/myBackendPool"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 80,
+              "backendPort": 80,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 4
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

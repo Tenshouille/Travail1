@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Insights/autoscaleSettings",
+      "apiVersion": "2019-03-01",
+      "location": "East US",
+      "name": "myAutoScaleSetting",
+      "properties": {
+        "targetResourceUri": "/subscriptions/a3883bb1-0903-4e2b-bdab-6f76535f6e96/resourceGroups/GroupeRessource1/providers/Microsoft.Compute/virtualMachines/myVM1",
+        "enabled": true,
+        "profiles": [
+          {
+            "name": "AutoScaleProfile",
+            "capacity": {
+              "minimum": "1",
+              "maximum": "5",
+              "default": "2"
+            },
+            "rules": [
+              {
+                "metricName": "Percentage CPU",
+                "timeAggregation": "Average",
+                "operator": "GreaterThan",
+                "threshold": 50,
+                "direction": "Increase",
+                "changeCount": 1,
+                "scaleIn": {
+                  "operator": "LessThan",
+                  "threshold": 50,
+                  "direction": "Decrease",
+                  "changeCount": 1
+                },
+                "scaleOut": {
+                  "operator": "GreaterThan",
+                  "threshold": 50,
+                  "direction": "Increase",
+                  "changeCount": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
