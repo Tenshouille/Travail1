@@ -19,7 +19,7 @@ steps:
 # Étape pour déployer les Machines Virtuelles
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Nom de ta connexion Azure'  # Remplace par le nom de ta connexion Azure
+    azureSubscription: 'Azure subscription 1'  # Remplace par le nom de ta connexion Azure
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
